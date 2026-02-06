@@ -1,0 +1,10 @@
+{
+  "id": "super-pilot",
+  "name": "Super Pilot",
+  "version": "0.1.0",
+  "description": "A Super Productivity plugin",
+  "manifestVersion": 1,
+  "minSupVersion": "14.0.0",
+  "iFrame": true,
+  "hooks": []
+}
