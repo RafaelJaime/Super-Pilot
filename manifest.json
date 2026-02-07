@@ -2,7 +2,7 @@
   "id": "super-pilot",
   "name": "Super Pilot",
   "version": "0.1.0",
-  "description": "A Super Productivity plugin",
+  "description": "AI copilot for Super Productivity - adds AI-powered text actions to all input fields",
   "manifestVersion": 1,
   "minSupVersion": "14.0.0",
   "iFrame": true,

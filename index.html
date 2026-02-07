@@ -1,23 +1,349 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Super Pilot</title>
+    <title>Super Pilot - Configuración</title>
     <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
       body {
-        padding: var(--s3);
-        font-family: var(--font-primary-stack);
-        color: var(--text-color);
-        background: var(--bg);
+        padding: 24px;
+        font-family: var(--font-primary-stack, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+        color: var(--text-color, #cdd6f4);
+        background: var(--bg, #11111b);
+        line-height: 1.5;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .header svg {
+        width: 32px;
+        height: 32px;
+        fill: var(--c-primary, #6366f1);
+      }
+
+      .header h1 {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .header .badge {
+        font-size: 11px;
+        background: var(--c-primary, #6366f1);
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 10px;
+      }
+
+      .card {
+        background: var(--card-bg, #1e1e2e);
+        border: 1px solid var(--border-color, #333);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 16px;
+      }
+
+      .card h2 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .form-group {
+        margin-bottom: 14px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        color: var(--text-muted, #a6adc8);
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 8px 12px;
+        background: var(--bg, #11111b);
+        color: var(--text-color, #cdd6f4);
+        border: 1px solid var(--border-color, #333);
+        border-radius: 6px;
+        font-size: 13px;
+        font-family: inherit;
+        transition: border-color .15s;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--c-primary, #6366f1);
+      }
+
+      .form-group textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+
+      .form-group .hint {
+        font-size: 11px;
+        color: var(--text-muted, #a6adc8);
+        margin-top: 4px;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+      }
+
+      .btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color, #333);
+        background: var(--bg, #11111b);
+        color: var(--text-color, #cdd6f4);
+        cursor: pointer;
+        font-size: 13px;
+        font-family: inherit;
+        transition: background .15s, border-color .15s;
+      }
+
+      .btn:hover {
+        border-color: var(--c-primary, #6366f1);
+      }
+
+      .btn-primary {
+        background: var(--c-primary, #6366f1);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      .btn-primary:hover {
+        opacity: 0.9;
+      }
+
+      .status {
+        font-size: 12px;
+        margin-top: 12px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        display: none;
+      }
+
+      .status.success {
+        display: block;
+        background: rgba(166, 227, 161, 0.1);
+        color: #a6e3a1;
+        border: 1px solid rgba(166, 227, 161, 0.2);
+      }
+
+      .status.error {
+        display: block;
+        background: rgba(243, 139, 168, 0.1);
+        color: #f38ba8;
+        border: 1px solid rgba(243, 139, 168, 0.2);
+      }
+
+      .presets {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+
+      .preset-btn {
+        padding: 4px 12px;
+        border-radius: 14px;
+        border: 1px solid var(--border-color, #333);
+        background: transparent;
+        color: var(--text-muted, #a6adc8);
+        cursor: pointer;
+        font-size: 11px;
+        transition: all .15s;
+      }
+
+      .preset-btn:hover {
+        border-color: var(--c-primary, #6366f1);
+        color: var(--c-primary, #6366f1);
       }
     </style>
   </head>
   <body>
-    <h1>Super Pilot</h1>
-    <p class="text-muted">Plugin is running.</p>
+    <div class="header">
+      <svg viewBox="0 0 24 24"><path d="M12 2L13.09 8.26L18 6L15.74 10.91L22 12L15.74 13.09L18 18L13.09 15.74L12 22L10.91 15.74L6 18L8.26 13.09L2 12L8.26 10.91L6 6L10.91 8.26L12 2Z"/></svg>
+      <h1>Super Pilot</h1>
+      <span class="badge">v0.1.0</span>
+    </div>
+
+    <div class="card">
+      <h2>API Connection</h2>
+
+      <div class="presets">
+        <button class="preset-btn" data-url="https://api.openai.com/v1" data-model="gpt-4o">OpenAI</button>
+        <button class="preset-btn" data-url="https://api.anthropic.com/v1" data-model="claude-sonnet-4-5-20250929">Anthropic</button>
+        <button class="preset-btn" data-url="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile">Groq</button>
+        <button class="preset-btn" data-url="https://openrouter.ai/api/v1" data-model="openai/gpt-4o">OpenRouter</button>
+        <button class="preset-btn" data-url="https://generativelanguage.googleapis.com/v1beta/openai" data-model="gemini-2.0-flash">Gemini</button>
+        <button class="preset-btn" data-url="http://localhost:11434/v1" data-model="llama3.2">Ollama</button>
+      </div>
+
+      <div class="form-group">
+        <label for="apiUrl">API URL</label>
+        <input type="text" id="apiUrl" placeholder="https://api.openai.com/v1" />
+        <div class="hint">Base URL of the API (OpenAI-compatible format)</div>
+      </div>
+
+      <div class="form-group">
+        <label for="apiKey">API Key</label>
+        <input type="password" id="apiKey" placeholder="sk-..." />
+        <div class="hint">Your API key. Stored only in localStorage.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="model">Model</label>
+        <input type="text" id="model" placeholder="gpt-4o" />
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>System Prompt</h2>
+
+      <div class="form-group">
+        <textarea id="systemPrompt" placeholder="You are a helpful assistant for task management and productivity."></textarea>
+        <div class="hint">Base instructions sent with every AI request.</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="saveBtn">Save</button>
+      <button class="btn" id="testBtn">Test connection</button>
+    </div>
+
+    <div class="status" id="status"></div>
 
     <script>
-      // Plugin UI logic goes here
+      const STORAGE_KEY = 'super-pilot-config';
+
+      const fields = {
+        apiUrl: document.getElementById('apiUrl'),
+        apiKey: document.getElementById('apiKey'),
+        model: document.getElementById('model'),
+        systemPrompt: document.getElementById('systemPrompt'),
+      };
+
+      const statusEl = document.getElementById('status');
+
+      function loadConfig() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const config = JSON.parse(raw);
+          if (config.apiUrl) fields.apiUrl.value = config.apiUrl;
+          if (config.apiKey) fields.apiKey.value = config.apiKey;
+          if (config.model) fields.model.value = config.model;
+          if (config.systemPrompt) fields.systemPrompt.value = config.systemPrompt;
+        } catch {}
+      }
+
+      function saveConfig() {
+        const config = {
+          apiUrl: fields.apiUrl.value.trim(),
+          apiKey: fields.apiKey.value.trim(),
+          model: fields.model.value.trim(),
+          systemPrompt: fields.systemPrompt.value.trim(),
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+
+        if (typeof PluginAPI !== 'undefined') {
+          PluginAPI.persistDataSynced(JSON.stringify(config));
+        }
+
+        showStatus('Configuration saved', 'success');
+      }
+
+      async function testConnection() {
+        const config = {
+          apiUrl: fields.apiUrl.value.trim(),
+          apiKey: fields.apiKey.value.trim(),
+          model: fields.model.value.trim(),
+        };
+
+        if (!config.apiUrl || !config.apiKey || !config.model) {
+          showStatus('Please fill in all fields first', 'error');
+          return;
+        }
+
+        showStatus('Testing connection...', 'success');
+
+        try {
+          const url = config.apiUrl.replace(/\/+$/, '') + '/chat/completions';
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${config.apiKey}`,
+            },
+            body: JSON.stringify({
+              model: config.model,
+              messages: [{ role: 'user', content: 'Reply only with: OK' }],
+              max_tokens: 10,
+            }),
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            const reply = data.choices?.[0]?.message?.content || '';
+            showStatus(`Connection successful. Response: "${reply}"`, 'success');
+          } else {
+            const err = await res.text();
+            showStatus(`Error ${res.status}: ${err.substring(0, 200)}`, 'error');
+          }
+        } catch (err) {
+          showStatus(`Connection error: ${err.message}`, 'error');
+        }
+      }
+
+      function showStatus(msg, type) {
+        statusEl.textContent = msg;
+        statusEl.className = 'status ' + type;
+      }
+
+      // Preset buttons
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          fields.apiUrl.value = btn.dataset.url;
+          fields.model.value = btn.dataset.model;
+          fields.apiUrl.focus();
+        });
+      });
+
+      document.getElementById('saveBtn').addEventListener('click', saveConfig);
+      document.getElementById('testBtn').addEventListener('click', testConnection);
+
+      // Load saved config on start
+      loadConfig();
+
+      // Also try to load synced data
+      if (typeof PluginAPI !== 'undefined') {
+        try {
+          const synced = PluginAPI.loadSyncedData();
+          if (synced && !localStorage.getItem(STORAGE_KEY)) {
+            localStorage.setItem(STORAGE_KEY, synced);
+            loadConfig();
+          }
+        } catch {}
+      }
     </script>
   </body>
 </html>
