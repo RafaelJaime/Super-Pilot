@@ -24,9 +24,9 @@
         justify-content: space-between;
         padding: 10px 14px;
         border-bottom: 1px solid rgba(255,255,255,.08);
-        background: rgba(30,30,46,.65);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        background: rgba(30,30,46,.85);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
         flex-shrink: 0;
       }
       .topbar-left {
@@ -70,6 +70,11 @@
         flex-direction: column;
         flex: 1;
         min-height: 0;
+        background: rgba(30, 30, 46, .45);
+        backdrop-filter: blur(16px) saturate(1.4);
+        -webkit-backdrop-filter: blur(16px) saturate(1.4);
+        border: 1px solid rgba(255, 255, 255, .06);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, .25);
       }
       .messages {
         flex: 1;
@@ -96,9 +101,9 @@
       }
       .msg.assistant {
         align-self: flex-start;
-        background: rgba(30,30,46,.55);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        background: rgba(30,30,46,.85);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
         border: 1px solid rgba(255,255,255,.08);
         border-bottom-left-radius: 4px;
       }
@@ -139,9 +144,9 @@
       .input-bar {
         padding: 10px 14px;
         border-top: 1px solid rgba(255,255,255,.08);
-        background: rgba(30,30,46,.65);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        background: rgba(30,30,46,.85);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
         flex-shrink: 0;
         display: flex;
         gap: 8px;
@@ -192,9 +197,9 @@
       .chat-view.hidden { display: none; }
 
       .card {
-        background: rgba(30,30,46,.45);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
+        background: rgba(30,30,46,.85);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
         border: 1px solid rgba(255,255,255,.08);
         border-radius: 10px;
         padding: 16px;

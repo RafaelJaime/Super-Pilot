@@ -374,21 +374,6 @@ Rules:
         parent.style.position = 'relative';
       }
     }
-
-    const btn = document.createElement('button');
-    btn.className = 'sp-ai-btn';
-    btn.title = 'Super Pilot AI';
-    btn.innerHTML = SPARKLE_SVG;
-    btn.setAttribute('tabindex', '-1');
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      showMenu(el, btn);
-    });
-
-    if (parent) {
-      parent.appendChild(btn);
-    }
   }
 
   // ── Scan and observe DOM ────────────────────────────────────────────
