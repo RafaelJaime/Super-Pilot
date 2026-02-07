@@ -1,239 +1,380 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Super Pilot - Configuración</title>
+    <title>Super Pilot</title>
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
 
       body {
-        padding: 24px;
         font-family: var(--font-primary-stack, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
         color: var(--text-color, #cdd6f4);
         background: var(--bg, #11111b);
         line-height: 1.5;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
       }
 
-      .header {
+      /* ── Top bar ─────────────────────────────────────── */
+      .topbar {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 24px;
+        justify-content: space-between;
+        padding: 10px 14px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        background: rgba(30,30,46,.65);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        flex-shrink: 0;
       }
-
-      .header svg {
-        width: 32px;
-        height: 32px;
-        fill: var(--c-primary, #6366f1);
-      }
-
-      .header h1 {
-        font-size: 20px;
-        font-weight: 600;
-      }
-
-      .header .badge {
-        font-size: 11px;
-        background: var(--c-primary, #6366f1);
-        color: #fff;
-        padding: 2px 8px;
-        border-radius: 10px;
-      }
-
-      .card {
-        background: var(--card-bg, #1e1e2e);
-        border: 1px solid var(--border-color, #333);
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 16px;
-      }
-
-      .card h2 {
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 16px;
+      .topbar-left {
         display: flex;
         align-items: center;
         gap: 8px;
       }
-
-      .form-group {
-        margin-bottom: 14px;
+      .topbar-left svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--c-primary, #6366f1);
       }
-
-      .form-group label {
-        display: block;
-        font-size: 12px;
-        font-weight: 500;
-        margin-bottom: 4px;
-        color: var(--text-muted, #a6adc8);
+      .topbar-left span {
+        font-size: 14px;
+        font-weight: 600;
       }
-
-      .form-group input,
-      .form-group textarea,
-      .form-group select {
-        width: 100%;
-        padding: 8px 12px;
-        background: var(--bg, #11111b);
-        color: var(--text-color, #cdd6f4);
-        border: 1px solid var(--border-color, #333);
-        border-radius: 6px;
-        font-size: 13px;
-        font-family: inherit;
-        transition: border-color .15s;
-      }
-
-      .form-group input:focus,
-      .form-group textarea:focus,
-      .form-group select:focus {
-        outline: none;
-        border-color: var(--c-primary, #6366f1);
-      }
-
-      .form-group textarea {
-        min-height: 80px;
-        resize: vertical;
-      }
-
-      .form-group .hint {
-        font-size: 11px;
-        color: var(--text-muted, #a6adc8);
-        margin-top: 4px;
-      }
-
-      .actions {
+      .topbar-right {
         display: flex;
-        gap: 10px;
-        margin-top: 8px;
+        gap: 4px;
       }
-
-      .btn {
-        padding: 8px 20px;
+      .icon-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
         border-radius: 6px;
-        border: 1px solid var(--border-color, #333);
-        background: var(--bg, #11111b);
-        color: var(--text-color, #cdd6f4);
-        cursor: pointer;
-        font-size: 13px;
-        font-family: inherit;
-        transition: background .15s, border-color .15s;
-      }
-
-      .btn:hover {
-        border-color: var(--c-primary, #6366f1);
-      }
-
-      .btn-primary {
-        background: var(--c-primary, #6366f1);
-        color: #fff;
-        border-color: transparent;
-      }
-
-      .btn-primary:hover {
-        opacity: 0.9;
-      }
-
-      .status {
-        font-size: 12px;
-        margin-top: 12px;
-        padding: 8px 12px;
-        border-radius: 6px;
-        display: none;
-      }
-
-      .status.success {
-        display: block;
-        background: rgba(166, 227, 161, 0.1);
-        color: #a6e3a1;
-        border: 1px solid rgba(166, 227, 161, 0.2);
-      }
-
-      .status.error {
-        display: block;
-        background: rgba(243, 139, 168, 0.1);
-        color: #f38ba8;
-        border: 1px solid rgba(243, 139, 168, 0.2);
-      }
-
-      .presets {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-        margin-bottom: 14px;
-      }
-
-      .preset-btn {
-        padding: 4px 12px;
-        border-radius: 14px;
-        border: 1px solid var(--border-color, #333);
         background: transparent;
         color: var(--text-muted, #a6adc8);
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background .15s, color .15s;
+      }
+      .icon-btn:hover { background: rgba(99,102,241,.15); color: var(--text-color, #cdd6f4); }
+      .icon-btn.active { color: var(--c-primary, #6366f1); }
+      .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+      /* ── Chat view ───────────────────────────────────── */
+      .chat-view {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+      }
+      .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .msg {
+        max-width: 88%;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 13px;
+        line-height: 1.5;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+      }
+      .msg.user {
+        align-self: flex-end;
+        background: var(--c-primary, #6366f1);
+        color: #fff;
+        border-bottom-right-radius: 4px;
+      }
+      .msg.assistant {
+        align-self: flex-start;
+        background: rgba(30,30,46,.55);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,.08);
+        border-bottom-left-radius: 4px;
+      }
+      .msg.assistant .model-tag {
+        display: block;
+        font-size: 10px;
+        color: var(--text-muted, #a6adc8);
+        margin-top: 6px;
+        text-align: right;
+      }
+      .msg.typing::after {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 14px;
+        background: var(--text-muted, #a6adc8);
+        margin-left: 4px;
+        animation: blink .6s infinite;
+        vertical-align: text-bottom;
+        border-radius: 1px;
+      }
+      @keyframes blink { 50% { opacity: 0; } }
+
+      .empty-state {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted, #a6adc8);
+        gap: 8px;
+        padding: 40px;
+      }
+      .empty-state svg { width: 40px; height: 40px; fill: var(--c-primary, #6366f1); opacity: .4; }
+      .empty-state p { font-size: 13px; text-align: center; }
+
+      /* ── Input bar ───────────────────────────────────── */
+      .input-bar {
+        padding: 10px 14px;
+        border-top: 1px solid rgba(255,255,255,.08);
+        background: rgba(30,30,46,.65);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        flex-shrink: 0;
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+      }
+      .input-bar textarea {
+        flex: 1;
+        padding: 8px 12px;
+        background: rgba(17,17,27,.5);
+        color: var(--text-color, #cdd6f4);
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 8px;
+        font-size: 13px;
+        font-family: inherit;
+        resize: none;
+        max-height: 120px;
+        line-height: 1.4;
+        transition: border-color .15s;
+      }
+      .input-bar textarea:focus { outline: none; border-color: var(--c-primary, #6366f1); }
+      .input-bar textarea::placeholder { color: var(--text-muted, #a6adc8); }
+      .send-btn {
+        width: 34px;
+        height: 34px;
+        border: none;
+        border-radius: 8px;
+        background: var(--c-primary, #6366f1);
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: opacity .15s;
+      }
+      .send-btn:hover { opacity: .85; }
+      .send-btn:disabled { opacity: .4; cursor: not-allowed; }
+      .send-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+      /* ── Settings view ───────────────────────────────── */
+      .settings-view {
+        display: none;
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+      }
+      .settings-view.visible { display: block; }
+      .chat-view.hidden { display: none; }
+
+      .card {
+        background: rgba(30,30,46,.45);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+      .card h2 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+
+      .form-group { margin-bottom: 10px; }
+      .form-group label {
+        display: block;
         font-size: 11px;
+        font-weight: 500;
+        margin-bottom: 3px;
+        color: var(--text-muted, #a6adc8);
+      }
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 7px 10px;
+        background: rgba(17,17,27,.5);
+        color: var(--text-color, #cdd6f4);
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 6px;
+        font-size: 12px;
+        font-family: inherit;
+        transition: border-color .15s;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus { outline: none; border-color: var(--c-primary, #6366f1); }
+      .form-group textarea { min-height: 70px; resize: vertical; }
+      .hint { font-size: 10px; color: var(--text-muted, #a6adc8); margin-top: 3px; }
+
+      .presets { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+      .preset-btn {
+        padding: 3px 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,.1);
+        background: rgba(255,255,255,.04);
+        color: var(--text-muted, #a6adc8);
+        cursor: pointer;
+        font-size: 10px;
         transition: all .15s;
       }
+      .preset-btn:hover { border-color: var(--c-primary, #6366f1); color: var(--c-primary, #6366f1); }
 
-      .preset-btn:hover {
-        border-color: var(--c-primary, #6366f1);
-        color: var(--c-primary, #6366f1);
+      .actions { display: flex; gap: 8px; margin-top: 6px; }
+      .btn {
+        padding: 7px 16px;
+        border-radius: 6px;
+        border: 1px solid rgba(255,255,255,.1);
+        background: rgba(17,17,27,.5);
+        color: var(--text-color, #cdd6f4);
+        cursor: pointer;
+        font-size: 12px;
+        font-family: inherit;
+        transition: all .15s;
       }
+      .btn:hover { border-color: var(--c-primary, #6366f1); }
+      .btn-primary { background: var(--c-primary, #6366f1); color: #fff; border-color: transparent; }
+      .btn-primary:hover { opacity: .9; }
+
+      .status {
+        font-size: 11px;
+        margin-top: 8px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        display: none;
+      }
+      .status.success { display: block; background: rgba(166,227,161,.1); color: #a6e3a1; border: 1px solid rgba(166,227,161,.2); }
+      .status.error { display: block; background: rgba(243,139,168,.1); color: #f38ba8; border: 1px solid rgba(243,139,168,.2); }
+
+      .go-settings-btn {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 5px 14px;
+        border-radius: 6px;
+        border: none;
+        background: var(--c-primary, #6366f1);
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: opacity .15s;
+      }
+      .go-settings-btn:hover { opacity: .85; }
     </style>
   </head>
   <body>
-    <div class="header">
-      <svg viewBox="0 0 24 24"><path d="M12 2L13.09 8.26L18 6L15.74 10.91L22 12L15.74 13.09L18 18L13.09 15.74L12 22L10.91 15.74L6 18L8.26 13.09L2 12L8.26 10.91L6 6L10.91 8.26L12 2Z"/></svg>
-      <h1>Super Pilot</h1>
-      <span class="badge">v0.1.0</span>
-    </div>
 
-    <div class="card">
-      <h2>API Connection</h2>
-
-      <div class="presets">
-        <button class="preset-btn" data-url="https://api.openai.com/v1" data-model="gpt-4o">OpenAI</button>
-        <button class="preset-btn" data-url="https://api.anthropic.com/v1" data-model="claude-sonnet-4-5-20250929">Anthropic</button>
-        <button class="preset-btn" data-url="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile">Groq</button>
-        <button class="preset-btn" data-url="https://openrouter.ai/api/v1" data-model="openai/gpt-4o">OpenRouter</button>
-        <button class="preset-btn" data-url="https://generativelanguage.googleapis.com/v1beta/openai" data-model="gemini-2.0-flash">Gemini</button>
-        <button class="preset-btn" data-url="http://localhost:11434/v1" data-model="llama3.2">Ollama</button>
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <svg viewBox="0 0 24 24"><path d="M20 9V7c0-1.1-.9-2-2-2h-3c0-1.66-1.34-3-3-3S9 3.34 9 5H6c-1.1 0-2 .9-2 2v2c-1.66 0-3 1.34-3 3s1.34 3 3 3v4c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4c1.66 0 3-1.34 3-3s-1.34-3-3-3zM7.5 11.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5S9.83 13 9 13s-1.5-.67-1.5-1.5zM16 17H8v-2h8v2zm-1-4c-.83 0-1.5-.67-1.5-1.5S14.17 10 15 10s1.5.67 1.5 1.5S15.83 13 15 13z"/></svg>
+        <span>Super Pilot</span>
       </div>
-
-      <div class="form-group">
-        <label for="apiUrl">API URL</label>
-        <input type="text" id="apiUrl" placeholder="https://api.openai.com/v1" />
-        <div class="hint">Base URL of the API (OpenAI-compatible format)</div>
-      </div>
-
-      <div class="form-group">
-        <label for="apiKey">API Key</label>
-        <input type="password" id="apiKey" placeholder="sk-..." />
-        <div class="hint">Your API key. Stored only in localStorage.</div>
-      </div>
-
-      <div class="form-group">
-        <label for="model">Model</label>
-        <input type="text" id="model" placeholder="gpt-4o" />
+      <div class="topbar-right">
+        <button class="icon-btn" id="settingsToggle" title="Settings">
+          <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.49.49 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1115.6 12 3.6 3.6 0 0112 15.6z"/></svg>
+        </button>
       </div>
     </div>
 
-    <div class="card">
-      <h2>System Prompt</h2>
-
-      <div class="form-group">
-        <textarea id="systemPrompt" placeholder="You are a helpful assistant for task management and productivity."></textarea>
-        <div class="hint">Base instructions sent with every AI request.</div>
+    <!-- Chat view -->
+    <div class="chat-view" id="chatView">
+      <div class="messages" id="messages">
+        <div class="empty-state" id="emptyState">
+          <svg viewBox="0 0 24 24"><path d="M20 9V7c0-1.1-.9-2-2-2h-3c0-1.66-1.34-3-3-3S9 3.34 9 5H6c-1.1 0-2 .9-2 2v2c-1.66 0-3 1.34-3 3s1.34 3 3 3v4c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4c1.66 0 3-1.34 3-3s-1.34-3-3-3zM7.5 11.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5S9.83 13 9 13s-1.5-.67-1.5-1.5zM16 17H8v-2h8v2zm-1-4c-.83 0-1.5-.67-1.5-1.5S14.17 10 15 10s1.5.67 1.5 1.5S15.83 13 15 13z"/></svg>
+          <p>Describe what is your next task</p>
+        </div>
+      </div>
+      <div class="input-bar">
+        <textarea id="chatInput" rows="1" placeholder="Describe what is your next task"></textarea>
+        <button class="send-btn" id="sendBtn" title="Send">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
       </div>
     </div>
 
-    <div class="actions">
-      <button class="btn btn-primary" id="saveBtn">Save</button>
-      <button class="btn" id="testBtn">Test connection</button>
+    <!-- Settings view -->
+    <div class="settings-view" id="settingsView">
+      <div class="card">
+        <h2>API Connection</h2>
+        <div class="presets">
+          <button class="preset-btn" data-url="https://api.openai.com/v1" data-model="gpt-4o">OpenAI</button>
+          <button class="preset-btn" data-url="https://api.anthropic.com/v1" data-model="claude-sonnet-4-5-20250929">Anthropic</button>
+          <button class="preset-btn" data-url="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile">Groq</button>
+          <button class="preset-btn" data-url="https://openrouter.ai/api/v1" data-model="openai/gpt-4o">OpenRouter</button>
+          <button class="preset-btn" data-url="https://generativelanguage.googleapis.com/v1beta/openai" data-model="gemini-2.0-flash">Gemini</button>
+          <button class="preset-btn" data-url="http://localhost:11434/v1" data-model="llama3.2">Ollama</button>
+        </div>
+        <div class="form-group">
+          <label for="apiUrl">API URL</label>
+          <input type="text" id="apiUrl" placeholder="https://api.openai.com/v1" />
+        </div>
+        <div class="form-group">
+          <label for="apiKey">API Key</label>
+          <input type="password" id="apiKey" placeholder="sk-..." />
+          <div class="hint">Stored only in localStorage.</div>
+        </div>
+        <div class="form-group">
+          <label for="model">Model</label>
+          <input type="text" id="model" placeholder="gpt-4o" />
+        </div>
+      </div>
+      <div class="card">
+        <h2>System Prompt</h2>
+        <div class="form-group">
+          <textarea id="systemPrompt" placeholder="You are a helpful assistant for task management and productivity."></textarea>
+          <div class="hint">Base instructions sent with every AI request.</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="saveBtn">Save</button>
+        <button class="btn" id="testBtn">Test connection</button>
+      </div>
+      <div class="status" id="status"></div>
     </div>
-
-    <div class="status" id="status"></div>
 
     <script>
       const STORAGE_KEY = 'super-pilot-config';
+      const DEFAULT_SYSTEM_PROMPT = `You are Super Pilot, an AI assistant embedded in Super Productivity.
+Your role is to help the user manage their tasks efficiently.
+
+Rules:
+- Be concise and direct. No preambles or unnecessary explanations.
+- Use Markdown formatting when useful (lists, bold, etc.).
+- When asked for a task description, include clear actionable steps.
+- Match the language of the input text (reply in the same language the user writes in).
+- Do not make up data or dates. Work with the context you have.
+- Focus on productivity, clarity, and getting things done.`;
+
+      // ── Elements ──────────────────────────────────────
+      const chatView = document.getElementById('chatView');
+      const settingsView = document.getElementById('settingsView');
+      const settingsToggle = document.getElementById('settingsToggle');
+      const messagesEl = document.getElementById('messages');
+      const emptyState = document.getElementById('emptyState');
+      const chatInput = document.getElementById('chatInput');
+      const sendBtn = document.getElementById('sendBtn');
+      const statusEl = document.getElementById('status');
 
       const fields = {
         apiUrl: document.getElementById('apiUrl'),
@@ -242,7 +383,121 @@
         systemPrompt: document.getElementById('systemPrompt'),
       };
 
-      const statusEl = document.getElementById('status');
+      let chatHistory = [];
+      let isSettingsOpen = false;
+
+      // ── Settings toggle ───────────────────────────────
+      settingsToggle.addEventListener('click', () => {
+        isSettingsOpen = !isSettingsOpen;
+        settingsView.classList.toggle('visible', isSettingsOpen);
+        chatView.classList.toggle('hidden', isSettingsOpen);
+        settingsToggle.classList.toggle('active', isSettingsOpen);
+      });
+
+      // ── Auto-resize textarea ──────────────────────────
+      chatInput.addEventListener('input', () => {
+        chatInput.style.height = 'auto';
+        chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
+      });
+
+      // ── Send message ──────────────────────────────────
+      chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+      sendBtn.addEventListener('click', sendMessage);
+
+      async function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        const config = getConfig();
+        if (!config.apiUrl || !config.apiKey || !config.model) {
+          if (emptyState) emptyState.style.display = 'none';
+          addMessage('user', text);
+          chatInput.value = '';
+          chatInput.style.height = 'auto';
+          const errEl = addMessage('assistant', '');
+          errEl.innerHTML = 'API not configured yet. <button class="go-settings-btn">Open Settings</button>';
+          errEl.querySelector('.go-settings-btn').addEventListener('click', openSettings);
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+          return;
+        }
+
+        // Hide empty state
+        if (emptyState) emptyState.style.display = 'none';
+
+        // Add user message
+        addMessage('user', text);
+        chatHistory.push({ role: 'user', content: text });
+        chatInput.value = '';
+        chatInput.style.height = 'auto';
+        sendBtn.disabled = true;
+
+        // Add typing indicator
+        const typingEl = addMessage('assistant', '', true);
+
+        try {
+          const url = config.apiUrl.replace(/\/+$/, '') + '/chat/completions';
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${config.apiKey}`,
+            },
+            body: JSON.stringify({
+              model: config.model,
+              messages: [
+                { role: 'system', content: config.systemPrompt || DEFAULT_SYSTEM_PROMPT },
+                ...chatHistory,
+              ],
+              max_tokens: 2048,
+            }),
+          });
+
+          if (!res.ok) {
+            const err = await res.text();
+            throw new Error(`API error ${res.status}: ${err.substring(0, 200)}`);
+          }
+
+          const data = await res.json();
+          const reply = data.choices?.[0]?.message?.content?.trim() || '(empty response)';
+
+          chatHistory.push({ role: 'assistant', content: reply });
+          typingEl.classList.remove('typing');
+          typingEl.innerHTML = escapeHtml(reply) + `<span class="model-tag">${config.model}</span>`;
+        } catch (err) {
+          typingEl.classList.remove('typing');
+          typingEl.innerHTML = `<span style="color:#f38ba8">${escapeHtml(err.message)}</span>`;
+        } finally {
+          sendBtn.disabled = false;
+          chatInput.focus();
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+      }
+
+      function addMessage(role, text, typing = false) {
+        const el = document.createElement('div');
+        el.className = `msg ${role}` + (typing ? ' typing' : '');
+        if (text) el.textContent = text;
+        messagesEl.appendChild(el);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+        return el;
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+      }
+
+      // ── Config helpers ────────────────────────────────
+      function getConfig() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : {};
+        } catch { return {}; }
+      }
 
       function loadConfig() {
         try {
@@ -256,7 +511,7 @@
         } catch {}
       }
 
-      function saveConfig() {
+      function saveConfigFromForm() {
         const config = {
           apiUrl: fields.apiUrl.value.trim(),
           apiKey: fields.apiKey.value.trim(),
@@ -264,11 +519,9 @@
           systemPrompt: fields.systemPrompt.value.trim(),
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
-
         if (typeof PluginAPI !== 'undefined') {
           PluginAPI.persistDataSynced(JSON.stringify(config));
         }
-
         showStatus('Configuration saved', 'success');
       }
 
@@ -278,14 +531,11 @@
           apiKey: fields.apiKey.value.trim(),
           model: fields.model.value.trim(),
         };
-
         if (!config.apiUrl || !config.apiKey || !config.model) {
           showStatus('Please fill in all fields first', 'error');
           return;
         }
-
         showStatus('Testing connection...', 'success');
-
         try {
           const url = config.apiUrl.replace(/\/+$/, '') + '/chat/completions';
           const res = await fetch(url, {
@@ -300,7 +550,6 @@
               max_tokens: 10,
             }),
           });
-
           if (res.ok) {
             const data = await res.json();
             const reply = data.choices?.[0]?.message?.content || '';
@@ -319,22 +568,19 @@
         statusEl.className = 'status ' + type;
       }
 
-      // Preset buttons
+      // ── Event listeners ───────────────────────────────
       document.querySelectorAll('.preset-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           fields.apiUrl.value = btn.dataset.url;
           fields.model.value = btn.dataset.model;
-          fields.apiUrl.focus();
         });
       });
 
-      document.getElementById('saveBtn').addEventListener('click', saveConfig);
+      document.getElementById('saveBtn').addEventListener('click', saveConfigFromForm);
       document.getElementById('testBtn').addEventListener('click', testConnection);
 
-      // Load saved config on start
+      // ── Init ──────────────────────────────────────────
       loadConfig();
-
-      // Also try to load synced data
       if (typeof PluginAPI !== 'undefined') {
         try {
           const synced = PluginAPI.loadSyncedData();
@@ -343,6 +589,13 @@
             loadConfig();
           }
         } catch {}
+      }
+
+      function openSettings() {
+        isSettingsOpen = true;
+        settingsView.classList.add('visible');
+        chatView.classList.add('hidden');
+        settingsToggle.classList.add('active');
       }
     </script>
   </body>
