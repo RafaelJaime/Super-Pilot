@@ -1,7 +1,7 @@
 {
   "id": "super-pilot",
   "name": "Super Pilot",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "AI copilot for Super Productivity - adds AI-powered text actions to all input fields and a chat",
   "manifestVersion": 1,
   "minSupVersion": "14.0.0",
