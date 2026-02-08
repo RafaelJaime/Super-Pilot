@@ -28,12 +28,12 @@
           type: 'function',
           function: {
             name: 'addTask',
-            description: 'Create a new task',
+            description: 'Create a new task. The title must be a short summary (never the raw user input). Put all details and user input text in notes.',
             parameters: {
               type: 'object',
               properties: {
-                title: { type: 'string', description: 'Task title' },
-                notes: { type: 'string', description: 'Task notes/description (optional)' }
+                title: { type: 'string', description: 'Short descriptive title for the task (do NOT paste user input here)' },
+                notes: { type: 'string', description: 'Task description with details, context, and user input text' }
               },
               required: ['title']
             }

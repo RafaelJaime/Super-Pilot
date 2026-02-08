@@ -15,14 +15,6 @@ A side-panel chat that connects to any OpenAI-compatible API (OpenAI, Anthropic,
 
 The agent uses function calling to interact with Super Productivity's data in real time.
 
-### Inline Text Actions
-An AI button appears on text inputs and textareas throughout Super Productivity:
-
-- **Generate description** — create actionable task descriptions
-- **Improve text** — rewrite for clarity and professionalism
-- **Summarize** — condense text to key points
-- **Custom prompt** — send any instruction to the AI
-
 ## Installation
 
 1. Download or clone this repository

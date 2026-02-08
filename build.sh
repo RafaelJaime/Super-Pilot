@@ -38,3 +38,6 @@ with open(out, 'w') as f:
     f.write(template)
 print('Built:', out)
 "
+
+zip -r "$SCRIPT_DIR/super-pilot.zip" manifest.json plugin.js index.html icon.svg
+echo "Packaged: $SCRIPT_DIR/super-pilot.zip"

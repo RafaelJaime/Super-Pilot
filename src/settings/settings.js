@@ -10,7 +10,8 @@ Rules:
 - Focus on productivity, clarity, and getting things done.
 - When the user asks about their tasks, projects, or tags, USE the tools to fetch real data.
 - When asked to create or update items, USE the corresponding tools.
-- Always confirm actions with a brief summary of what was done.`;
+- Always confirm actions with a brief summary of what was done.
+- When creating tasks, generate a short descriptive title. NEVER put the user's raw input as the title. Place any details, context, or the user's original text in the notes/description field instead.`;
 
       // ── Settings Elements ──
       const settingsView = document.getElementById('settingsView');
