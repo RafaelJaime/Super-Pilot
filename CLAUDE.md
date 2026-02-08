@@ -11,13 +11,37 @@ This is a **Super Productivity plugin** project. Super Productivity is a task ma
 ```
 ├── manifest.json      # Plugin metadata (required)
 ├── plugin.js          # Main JS executed on activation and app start
-├── index.html         # UI interface (optional, requires iFrame:true in manifest)
-└── icon.svg           # Plugin icon (optional)
+├── index.html         # Built output (do NOT edit directly)
+├── icon.svg           # Plugin icon (optional)
+├── build.sh           # Assembles src/ modules into index.html
+└── src/
+    ├── base.html      # HTML template with placeholders
+    ├── base.css       # Global styles (body, topbar, icon-btn)
+    ├── settings/
+    │   ├── settings.html   # Settings panel markup
+    │   ├── settings.css    # Settings styles
+    │   └── settings.js     # Config CRUD, presets, test connection
+    ├── chat/
+    │   ├── chat.html       # Chat messages container
+    │   ├── chat.css        # Chat/message styles
+    │   └── chat.js         # Agent loop, tool definitions, chat history
+    └── input/
+        ├── input.html      # Textarea + send button
+        ├── input.css       # Input bar styles
+        └── input.js        # sendMessage, auto-resize, listeners
+```
+
+## Build
+
+`index.html` is auto-generated. **Edit files in `src/`**, then run:
+
+```bash
+bash build.sh
 ```
 
 ## Key Constraints
 
-- **Iframe plugins must inline everything**: All CSS and JS must be inside `index.html`. External stylesheets and scripts are blocked by CSP.
+- **Iframe plugins must inline everything**: All CSS and JS must be inside `index.html`. The build script handles this — edit source files in `src/` and run `bash build.sh`.
 - **Registration methods (`registerHeaderButton`, `registerMenuEntry`, `registerSidePanelButton`, `registerShortcut`, `registerHook`) are only available in `plugin.js`**, not in iframe context.
 - **manifest.json `manifestVersion` must be `1`**.
 - Plugins run sandboxed: no direct file system access, only through `PluginAPI`.

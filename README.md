@@ -42,11 +42,28 @@ Open the settings panel (gear icon) and set:
 ## Project Structure
 
 ```
-├── manifest.json   # Plugin metadata
-├── plugin.js       # Inline text actions (runs in app context)
-├── index.html      # Chat UI + agent logic (runs in iframe)
-└── icon.svg        # Plugin icon
+├── manifest.json       # Plugin metadata
+├── plugin.js           # Inline text actions (runs in app context)
+├── index.html          # Built output (do NOT edit directly)
+├── icon.svg            # Plugin icon
+├── build.sh            # Assembles src/ modules into index.html
+└── src/
+    ├── base.html       # HTML template with placeholders
+    ├── base.css        # Global styles
+    ├── settings/       # Settings panel (html, css, js)
+    ├── chat/           # Chat agent (html, css, js)
+    └── input/          # Input bar (html, css, js)
 ```
+
+## Development
+
+Edit source files in `src/`, then rebuild:
+
+```bash
+bash build.sh
+```
+
+This inlines all CSS and JS into `index.html` (required by Super Productivity's CSP).
 
 ## Requirements
 

@@ -1,0 +1,39 @@
+    <!-- Settings view -->
+    <div class="settings-view" id="settingsView">
+      <div class="card">
+        <h2>API Connection</h2>
+        <div class="presets">
+          <button class="preset-btn" data-url="https://api.openai.com/v1" data-model="gpt-4o">OpenAI</button>
+          <button class="preset-btn" data-url="https://api.anthropic.com/v1" data-model="claude-sonnet-4-5-20250929">Anthropic</button>
+          <button class="preset-btn" data-url="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile">Groq</button>
+          <button class="preset-btn" data-url="https://openrouter.ai/api/v1" data-model="openai/gpt-4o">OpenRouter</button>
+          <button class="preset-btn" data-url="https://generativelanguage.googleapis.com/v1beta/openai" data-model="gemini-2.0-flash">Gemini</button>
+          <button class="preset-btn" data-url="http://localhost:11434/v1" data-model="llama3.2">Ollama</button>
+        </div>
+        <div class="form-group">
+          <label for="apiUrl">API URL</label>
+          <input type="text" id="apiUrl" placeholder="https://api.openai.com/v1" />
+        </div>
+        <div class="form-group">
+          <label for="apiKey">API Key</label>
+          <input type="password" id="apiKey" placeholder="sk-..." />
+          <div class="hint">Stored only in localStorage.</div>
+        </div>
+        <div class="form-group">
+          <label for="model">Model</label>
+          <input type="text" id="model" placeholder="gpt-4o" />
+        </div>
+      </div>
+      <div class="card">
+        <h2>System Prompt</h2>
+        <div class="form-group">
+          <textarea id="systemPrompt" placeholder="You are a helpful assistant for task management and productivity."></textarea>
+          <div class="hint">Base instructions sent with every AI request.</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="saveBtn">Save</button>
+        <button class="btn" id="testBtn">Test connection</button>
+      </div>
+      <div class="status" id="status"></div>
+    </div>

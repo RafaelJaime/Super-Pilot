@@ -1,0 +1,44 @@
+.input-bar {
+  padding: 10px 14px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: rgba(30,30,46,.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.input-bar textarea {
+  flex: 1;
+  padding: 8px 12px;
+  background: rgba(17,17,27,.5);
+  color: var(--text-color, #cdd6f4);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  resize: none;
+  max-height: 120px;
+  line-height: 1.4;
+  transition: border-color .15s;
+}
+.input-bar textarea:focus { outline: none; border-color: var(--c-primary, #6366f1); }
+.input-bar textarea::placeholder { color: var(--text-muted, #a6adc8); }
+.send-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  background: var(--c-primary, #6366f1);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity .15s;
+}
+.send-btn:hover { opacity: .85; }
+.send-btn:disabled { opacity: .4; cursor: not-allowed; }
+.send-btn svg { width: 18px; height: 18px; fill: currentColor; }
